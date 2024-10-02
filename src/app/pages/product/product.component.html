@@ -1,0 +1,15 @@
+<p>product works! {{ user.name }}</p>
+<p [title]="user.age">my age:{{ user.age }}</p>
+
+<input type="text" placeholder="Enter Name" [(ngModel)]="modelName" />
+<button (click)="setName($event)">Set Name</button>
+
+<button (click)="increase()">+</button>
+<span>Age: {{ user.age }}</span>
+<button (click)="decrease()">-</button>
+
+@if (user.age > 40) {
+  <span>Hello</span>
+} @else {
+  <span>too young</span>
+}

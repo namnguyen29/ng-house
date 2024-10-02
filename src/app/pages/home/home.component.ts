@@ -16,6 +16,12 @@ export class HomeComponent {
   public housingLocationList$ = this.housingService.getAllHousingLocations();
   public filteredLocationList$ = this.housingLocationList$;
 
+  constructor() {
+    this.filteredLocationList$.subscribe((x) => {
+      console.log('house list::', x);
+    });
+  }
+
   public filterResults(text: string): void {
     if (!text) {
       return;
