@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { ProgressBarComponent } from './components';
+
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ProgressBarComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })

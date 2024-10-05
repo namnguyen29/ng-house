@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 
-import { HousingLocation } from '../interfaces/housing-location';
-import { ENV_CONFIG } from '../configs/env-config';
+import { ENV_CONFIG } from '@app-core/configs';
+import { HousingLocation } from '@app-shared/interfaces';
 
 @Injectable({
   providedIn: 'root'

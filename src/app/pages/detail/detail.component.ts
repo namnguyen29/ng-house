@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Observable, takeUntil } from 'rxjs';
-import { HousingLocation } from '../../interfaces/housing-location';
-import { HousingService } from '../../services/housing.service';
+import { Observable } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
-import { DestroyService } from '../../services/destroy.service';
+
+import { HousingLocation } from '@app-shared/interfaces';
+import { HousingService } from '@app-shared/services';
 
 @Component({
   selector: 'app-detail',
@@ -15,11 +15,10 @@ import { DestroyService } from '../../services/destroy.service';
   styleUrl: './detail.component.scss'
 })
 export class DetailComponent implements OnInit {
-  private readonly route: ActivatedRoute = inject(ActivatedRoute);
+  private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
   private readonly housingService = inject(HousingService);
-  private readonly destroyService = inject(DestroyService);
-  public housingLocationId = -1;
+  private housingLocationId = -1;
   public housingLocation$!: Observable<HousingLocation | undefined>;
   public applyForm = this.fb.group({
     firstName: this.fb.control(''),
@@ -28,10 +27,8 @@ export class DetailComponent implements OnInit {
   });
 
   public ngOnInit(): void {
-    this.route.params.pipe(takeUntil(this.destroyService._destroy$)).subscribe((detailParam) => {
-      this.housingLocationId = +detailParam['id'];
-      this.housingLocation$ = this.housingService.getHousingLocationById(this.housingLocationId);
-    });
+    this.housingLocationId = this.route.snapshot.params['id'];
+    this.housingLocation$ = this.housingService.getHousingLocationById(this.housingLocationId);
   }
 
   public submitApplication(): void {
