@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-progress-bar',
@@ -32,19 +32,19 @@ export class ProgressBarComponent implements OnInit {
     }
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges::', changes);
-    if ('progress' in changes) {
-      if (typeof changes['progress'].currentValue !== 'number') {
-        const progress = Number(changes['progress'].currentValue);
-        if (Number.isNaN(progress)) {
-          this.progress = 0;
-        } else {
-          this.progress = progress;
-        }
-      }
-    }
-  }
+  // public ngOnChanges(changes: SimpleChanges): void {
+  //   console.log('ngOnChanges::', changes);
+  //   if ('progress' in changes) {
+  //     if (typeof changes['progress'].currentValue !== 'number') {
+  //       const progress = Number(changes['progress'].currentValue);
+  //       if (Number.isNaN(progress)) {
+  //         this.progress = 0;
+  //       } else {
+  //         this.progress = progress;
+  //       }
+  //     }
+  //   }
+  // }
 
   public ngOnInit(): void {}
 }
