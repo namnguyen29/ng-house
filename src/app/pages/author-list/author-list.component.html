@@ -1,0 +1,9 @@
+@for (item of authors; track item.id) {
+  <app-author-detail
+    [author]="item"
+    (selectAuthor)="selectAuthor($event)"
+    (deleteAuthor)="deleteAuthor($event)"
+  ></app-author-detail>
+  <br />
+}
+<p>SelectedAuthor: {{ selectedAuthor.firstName }} {{ selectedAuthor.lastName }}</p>
