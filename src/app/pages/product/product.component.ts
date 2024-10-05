@@ -1,24 +1,67 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 
-import { ProgressBarComponent } from './components';
+import { ProgressBarComponent, ToggleComponent } from './components';
+import { FlexContainerComponent } from '@app-shared/components';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [FormsModule, ProgressBarComponent],
+  imports: [
+    FormsModule,
+    ProgressBarComponent,
+    ToggleComponent,
+    CommonModule,
+    FlexContainerComponent
+  ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
-export class ProductComponent {
+export class ProductComponent implements AfterViewInit, OnInit, OnDestroy {
+  private readonly _destroy$ = new Subject<void>();
+  @ViewChildren(ToggleComponent) public toggleCmp!: QueryList<ToggleComponent>;
+  @ViewChild('inputCmp', {
+    static: true
+    // read: ElementRef
+  })
+  public inputCmp!: ElementRef<HTMLInputElement>;
   public user = {
     name: 'Nam',
     age: 40
   };
   public modelName = '';
+  public isChecked = false;
+  public isLast = true;
 
-  public setName(event: Event): void {
-    console.log('evt::', event);
+  public ngOnInit(): void {
+    this.inputCmp.nativeElement.focus();
+  }
+
+  public ngAfterViewInit(): void {
+    console.log('this.toggleCmp::', this.toggleCmp);
+    console.log('this.inputCmp::', this.inputCmp);
+    this.toggleCmp.changes.pipe(takeUntil(this._destroy$)).subscribe((x) => {
+      console.log(x);
+    });
+  }
+
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  public setName(): void {
     this.modelName = 'Go away!';
   }
 
