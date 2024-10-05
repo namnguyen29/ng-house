@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { HousingService } from '../../services/housing.service';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+
 import { HouseLocationComponent } from './components';
+import { HousingService } from '@app-shared/services';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +16,6 @@ export class HomeComponent {
   private readonly housingService = inject(HousingService);
   public housingLocationList$ = this.housingService.getAllHousingLocations();
   public filteredLocationList$ = this.housingLocationList$;
-
-  constructor() {
-    this.filteredLocationList$.subscribe((x) => {
-      console.log('house list::', x);
-    });
-  }
 
   public filterResults(text: string): void {
     if (!text) {

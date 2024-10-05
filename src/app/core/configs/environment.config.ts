@@ -1,5 +1,6 @@
 import { InjectionToken, ValueProvider } from '@angular/core';
-import { Environment } from '../interfaces/envinronment';
+
+import { Environment } from '@app-shared/interfaces';
 
 export const ENV_CONFIG = new InjectionToken<Environment>('env.config');
 
