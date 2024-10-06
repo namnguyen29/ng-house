@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
@@ -10,7 +10,8 @@ import { HousingService } from '@app-shared/services';
   standalone: true,
   imports: [HouseLocationComponent, AsyncPipe],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
   private readonly housingService = inject(HousingService);
