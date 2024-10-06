@@ -1,3 +1,13 @@
+<!-- 
+	CSS selector. Matching elements are projected into this <ng-content>
+-->
+<header><ng-content select=".header"></ng-content></header>
 <div class="toggle-wrapper" tabindex="0" [class.checked]="checked" (click)="toggle()">
   <div class="toggle"></div>
+  <footer><ng-content select=".footer"></ng-content></footer>
 </div>
+<div><ng-content select=".content"></ng-content></div>
+
+<section>
+  <ng-content select="app-progress-bar"></ng-content>
+</section>

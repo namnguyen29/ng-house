@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
+  TemplateRef,
   ViewChild,
   ViewChildren
 } from '@angular/core';
@@ -31,6 +32,7 @@ import { FlexContainerComponent } from '@app-shared/components';
 export class ProductComponent implements AfterViewInit, OnInit, OnDestroy {
   private readonly _destroy$ = new Subject<void>();
   @ViewChildren(ToggleComponent) public toggleCmp!: QueryList<ToggleComponent>;
+  @ViewChild('myTmpl') myTmpl!: TemplateRef<HTMLParagraphElement>;
   @ViewChild('inputCmp', {
     static: true
     // read: ElementRef
@@ -42,6 +44,7 @@ export class ProductComponent implements AfterViewInit, OnInit, OnDestroy {
   };
   public modelName = '';
   public isChecked = false;
+  public isChecked2 = true;
   public isLast = true;
 
   public ngOnInit(): void {
@@ -49,8 +52,7 @@ export class ProductComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   public ngAfterViewInit(): void {
-    console.log('this.toggleCmp::', this.toggleCmp);
-    console.log('this.inputCmp::', this.inputCmp);
+    console.log('myTmpl::', this.myTmpl);
     this.toggleCmp.changes.pipe(takeUntil(this._destroy$)).subscribe((x) => {
       console.log(x);
     });

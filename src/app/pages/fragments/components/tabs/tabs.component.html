@@ -1,0 +1,28 @@
+<ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-20">
+  @for (item of navigations; track $index) {
+    @if (linkTemplate) {
+      <ng-container
+        *ngTemplateOutlet="
+          linkTemplate;
+          context: {
+            link: item
+          }
+        "
+      ></ng-container>
+    } @else {
+      <li class="me-2">
+        <a
+          href="#"
+          aria-current="page"
+          class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+          >{{ item }}</a
+        >
+      </li>
+    }
+  }
+</ul>
+
+<!-- 
+https://angular.dev/api/common/NgTemplateOutlet?tab=usage-notes
+Dùng ngTemplateOutlet để pass tempalte từ component cha => con, có thể pass input xuống với cú pháp như trên
+-->

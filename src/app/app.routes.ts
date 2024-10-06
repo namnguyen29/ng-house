@@ -12,6 +12,12 @@ export const routes: Routes = [
         title: 'Homie | Ng House'
       },
       {
+        path: 'fragments',
+        loadComponent: async () =>
+          (await import('./pages/fragments/fragments.component')).FragmentsComponent,
+        title: 'Fragment List'
+      },
+      {
         path: 'details/:id',
         loadComponent: async () =>
           (await import('./pages/detail/detail.component')).DetailComponent,

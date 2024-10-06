@@ -1,0 +1,29 @@
+<div class="border rounded-lg shadow-lg">
+  <div class="bg-gray-100 px-4 py-2 font-semibold">
+    You have selected
+    <ng-container *ngTemplateOutlet="counterTmpl"></ng-container> items.
+  </div>
+  <div class="px-4 py-3">
+    There are <ng-container *ngTemplateOutlet="counterTmpl"></ng-container> items selected.
+  </div>
+  <div class="bg-gray-100 px-4 py-2 font-semibold">
+    You have selected
+    <ng-container *ngTemplateOutlet="counterTmpl"></ng-container> items.
+  </div>
+</div>
+
+<ng-template #counterTmpl>
+  <span class="bg-green-500 text-white px-2 py-1 rounded">{{ counter }}</span>
+</ng-template>
+
+<br />
+
+<app-tabs [navigations]="navigations" [linkTemplate]="linkTemplate"></app-tabs>
+<br />
+<app-tabs [navigations]="navigations"></app-tabs>
+
+<ng-template #linkTemplate let-item="link">
+  <li>
+    <h4 class="text-red-300">{{ item }}</h4>
+  </li>
+</ng-template>
