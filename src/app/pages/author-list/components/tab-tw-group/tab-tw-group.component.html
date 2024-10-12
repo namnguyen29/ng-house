@@ -1,0 +1,28 @@
+<ul
+  class="flex flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400"
+  aria-label="reuse tab group component using DI"
+>
+  @for (tab of tabPanelList; track $index) {
+    <li class="me-2">
+      <button
+        class="inline-block rounded-lg bg-yellow-500 px-4 py-3 text-white"
+        type="button"
+        [routerLink]="'/authors'"
+        [class.active]="$index === activeIndex"
+        (click)="activeIndexChange.emit($index)"
+      >
+        {{ tab.title }}
+      </button>
+
+      <button (click)="removeTab(tab)">X</button>
+    </li>
+  }
+</ul>
+
+@if (tabPanelList.length) {
+  <div class="tab-body">
+    <ng-container *ngTemplateOutlet="tabPanelList[activeIndex].panelBody"></ng-container>
+  </div>
+} @else {
+  <span>No more tab</span>
+}
