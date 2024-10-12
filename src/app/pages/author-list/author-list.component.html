@@ -1,9 +1,13 @@
-@for (item of authors; track item.id) {
-  <app-author-detail
-    [author]="item"
-    (selectAuthor)="selectAuthor($event)"
-    (deleteAuthor)="deleteAuthor($event)"
-  ></app-author-detail>
-  <br />
-}
-<p>SelectedAuthor: {{ selectedAuthor.firstName }} {{ selectedAuthor.lastName }}</p>
+<div class="mx-5">
+  <app-tab-group [(activeIndex)]="currentIndex">
+    <app-tab-panel title="First Tab"> First Tab Content </app-tab-panel>
+    <app-tab-panel title="Second Tab"> Second Tab Content </app-tab-panel>
+    <app-tab-panel title="Third Tab"> Third Tab Content </app-tab-panel>
+  </app-tab-group>
+
+  <app-tab-tw-group [(activeIndex)]="currentIndex">
+    <app-tab-panel title="First Tab"> First Tab Content </app-tab-panel>
+    <app-tab-panel title="Second Tab"> Second Tab Content </app-tab-panel>
+    <app-tab-panel title="Third Tab"> Third Tab Content </app-tab-panel>
+  </app-tab-tw-group>
+</div>
