@@ -1,7 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  QueryList
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TabPanelComponent } from '..';
 import { NgTemplateOutlet } from '@angular/common';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tab-group',
@@ -10,10 +20,23 @@ import { NgTemplateOutlet } from '@angular/common';
   templateUrl: './tab-group.component.html',
   styleUrl: './tab-group.component.scss'
 })
-export class TabGroupComponent {
+export class TabGroupComponent implements AfterContentInit, OnDestroy {
   @Input() public activeIndex = 0;
   @Output() public activeIndexChange = new EventEmitter<number>();
+  @ContentChildren(TabPanelComponent) tabPanels!: QueryList<TabPanelComponent>;
   public tabPanelList: TabPanelComponent[] = [];
+  private readonly destroy$ = new Subject<void>();
+
+  public ngAfterContentInit(): void {
+    this.tabPanels.changes.pipe(takeUntil(this.destroy$)).subscribe((x) => {
+      console.log(x);
+    });
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   public addTab(tab: TabPanelComponent): void {
     this.tabPanelList = [...this.tabPanelList, tab];
@@ -35,7 +58,6 @@ export class TabGroupComponent {
   }
 
   public changeTab(index: number): void {
-    console.log('change');
     this.activeIndexChange.emit(index);
   }
 }

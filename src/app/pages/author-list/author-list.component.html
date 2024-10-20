@@ -1,9 +1,32 @@
-<div class="mx-5">
+<div class="mx-5 flex flex-col gap-4">
   <app-tab-group [(activeIndex)]="currentIndex">
-    <app-tab-panel title="First Tab"> First Tab Content </app-tab-panel>
-    <app-tab-panel title="Second Tab"> Second Tab Content </app-tab-panel>
-    <app-tab-panel title="Third Tab"> Third Tab Content </app-tab-panel>
+    <app-tab-panel title="First Tab">
+      <ng-template appTabPanel>
+        First Tab Content
+        <app-counter></app-counter>
+      </ng-template>
+    </app-tab-panel>
+
+    <app-tab-panel title="Second Tab">
+      <ng-template appTabPanel>
+        Second Tab Content
+        <app-counter></app-counter>
+      </ng-template>
+    </app-tab-panel>
+
+    @if (showFinalTab) {
+      <app-tab-panel title="Third Tab">
+        <ng-template appTabPanel>
+          Third Tab Content
+          <app-counter></app-counter>
+        </ng-template>
+      </app-tab-panel>
+    } @else {}
   </app-tab-group>
+  <!-- 
+  3 instance => 3 instance
+  lazy load template using template ref
+  -->
 
   <app-tab-tw-group [(activeIndex)]="currentIndex">
     <app-tab-panel title="First Tab"> First Tab Content </app-tab-panel>
@@ -11,3 +34,11 @@
     <app-tab-panel title="Third Tab"> Third Tab Content </app-tab-panel>
   </app-tab-tw-group>
 </div>
+
+<button
+  type="button"
+  class="mx-1 mb-2 me-2 rounded-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-br focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
+  (click)="showFinalTab = !showFinalTab"
+>
+  Toggle final tab
+</button>

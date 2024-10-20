@@ -22,7 +22,6 @@
 </app-toggle>
 
 <!-- Interact with component using #template -->
-<!-- <button (click)="toggleCmp.toggle()">Toggle from Product</button> -->
 <input #inputCmp placeholder="Focus_me" />
 <app-flex-container flexDirection="row-reverse">
   <p>100</p>
@@ -40,6 +39,7 @@
 
 <ng-template #myTmpl>
   <p>This is my template</p>
+  <button (click)="showTemplate()">Show tmpl</button>
 </ng-template>
 
 <ng-template #myTmpl2>
