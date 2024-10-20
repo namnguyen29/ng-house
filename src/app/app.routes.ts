@@ -33,7 +33,7 @@ export const routes: Routes = [
         path: 'authors',
         loadComponent: async () =>
           (await import('./pages/author-list/author-list.component')).AuthorListComponent,
-        title: 'Authors'
+        title: 'Authors | Ng House'
       }
     ]
   }
