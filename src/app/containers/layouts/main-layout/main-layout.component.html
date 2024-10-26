@@ -1,7 +1,15 @@
 <main>
   <a [routerLink]="['/']">
     <header class="brand-name">
-      <img class="brand-logo" src="/logo.png" alt="logo" aria-hidden="true" />
+      <img
+        priority
+        ngSrc="/logo.png"
+        class="brand-logo"
+        alt="logo"
+        aria-hidden="true"
+        height="63"
+        width="175"
+      />
     </header>
   </a>
   <section class="content">

@@ -9,7 +9,7 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: async () => (await import('./pages/home/home.component')).HomeComponent,
-        title: 'Homie | Ng House'
+        title: 'Home | Ng House'
       },
       {
         path: 'fragments',
@@ -34,6 +34,12 @@ export const routes: Routes = [
         loadComponent: async () =>
           (await import('./pages/author-list/author-list.component')).AuthorListComponent,
         title: 'Authors | Ng House'
+      },
+      {
+        path: 'my-pipe',
+        loadComponent: async () =>
+          (await import('./pages/my-pipe/my-pipe.component')).MyPipeComponent,
+        title: 'My Pipe | Ng House'
       }
     ]
   }
