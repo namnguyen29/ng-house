@@ -8,7 +8,6 @@ import { AddressLike } from '@app-shared/interfaces';
 })
 export class FormatAddressPipe implements PipeTransform {
   public transform(value: AddressLike): string {
-    console.log('log format all');
     return `${value.name}-${value.address}-${value.age}-${value.country}`;
   }
 }

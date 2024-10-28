@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 
 import { HousingLocation } from '@app-shared/interfaces';
 import { HousingService } from '@app-shared/services';
@@ -10,7 +10,7 @@ import { HousingService } from '@app-shared/services';
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, ReactiveFormsModule],
+  imports: [RouterLink, AsyncPipe, ReactiveFormsModule, NgOptimizedImage],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
 })
