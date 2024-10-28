@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+
+import { map } from 'rxjs';
 
 import { HouseLocationComponent } from './components';
 import { HousingService } from '@app-shared/services';

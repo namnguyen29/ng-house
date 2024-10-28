@@ -3,10 +3,11 @@
     <a routerLink="/">← Return to list</a>
 
     <img
-      class="listing-photo"
-      [src]="housingLocation?.photo"
-      alt="Exterior photo of {{ housingLocation?.name }}"
+      fill
       crossorigin
+      class="listing-photo"
+      alt="Exterior of {{ housingLocation?.name }}"
+      [ngSrc]="housingLocation.photo"
       (submit)="submitApplication()"
     />
     <section class="listing-description">
