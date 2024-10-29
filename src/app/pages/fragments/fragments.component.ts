@@ -13,7 +13,20 @@ import {
   buffer,
   interval,
   fromEvent,
-  bufferTime
+  bufferTime,
+  from,
+  filter,
+  first,
+  last,
+  find,
+  single,
+  take,
+  takeLast,
+  skip,
+  distinct,
+  distinctUntilChanged,
+  distinctUntilKeyChanged,
+  withLatestFrom
 } from 'rxjs';
 import { NodeEventHandler } from 'rxjs/internal/observable/fromEvent';
 
@@ -94,8 +107,37 @@ export class FragmentsComponent implements OnInit {
     interval$.pipe(bufferTime(2000));
 
     // scan vs reduce
-    merge(of(this.users[0]).pipe(delay(2000)), of(this.users[1]).pipe(delay(4000)))
-      .pipe(scan((acc, curr) => acc + curr?.amount, 0))
-      .subscribe(observer);
+    merge(of(this.users[0]).pipe(delay(2000)), of(this.users[1]).pipe(delay(4000))).pipe(
+      scan((acc, curr) => acc + curr?.amount, 0)
+    );
+
+    // filter
+    of(
+      { age: 4, name: 'Foo' },
+      { age: 4, name: 'DFoo' },
+      { age: 7, name: 'Bar' },
+      { age: 5, name: 'Foo' }
+    ).pipe(
+      // single((x) => x % 2 === 0)
+      /*
+        single is like first, but it will throw error
+        if the stream has more than 1 element that match the predicate
+        */
+      // find((x) => x % 2 === 0)
+      //filter((x) => x > 1)
+      //first()
+      //last()
+      // take(1) // use take(1) to get snapshot, route guard, get data at moment, interceptor
+      // takeLast(1)
+      // skip(1)
+      //distinct() - remove  duplicate
+      // debounceTime(300) => distinctUntilChanged() => to handle dynamic search
+      // distinctUntilKeyChanged('name')
+      distinctUntilChanged((a, b) => a.age === b.age)
+    );
+
+    // test withLatestFrom, combine outer observable with another observable
+    // use in NgRx
+    fromEvent(document, 'click').pipe(withLatestFrom(interval$));
   }
 }

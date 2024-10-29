@@ -12,6 +12,7 @@ export const routes: Routes = [
         title: 'Home | Ng House'
       },
       {
+        // learn rxjs in this page
         path: 'fragments',
         loadComponent: async () =>
           (await import('./pages/fragments/fragments.component')).FragmentsComponent,
