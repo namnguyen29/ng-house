@@ -4,7 +4,6 @@ import { AddressLike } from '@app-shared/interfaces';
 @Pipe({
   name: 'formatAddress',
   standalone: true
-  //pure
 })
 export class FormatAddressPipe implements PipeTransform {
   public transform(value: AddressLike): string {
