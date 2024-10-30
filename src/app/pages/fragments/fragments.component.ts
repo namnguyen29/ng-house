@@ -26,7 +26,15 @@ import {
   distinct,
   distinctUntilChanged,
   distinctUntilKeyChanged,
-  withLatestFrom
+  withLatestFrom,
+  forkJoin,
+  combineLatest,
+  zip,
+  concat,
+  startWith,
+  finalize,
+  endWith,
+  pairwise
 } from 'rxjs';
 import { NodeEventHandler } from 'rxjs/internal/observable/fromEvent';
 
@@ -136,8 +144,31 @@ export class FragmentsComponent implements OnInit {
       distinctUntilChanged((a, b) => a.age === b.age)
     );
 
+    //forkJoin - emit all value when all outer observable emit
+    forkJoin([of('x'), of('y'), of('z')]);
+
+    //combineLatest  - emit state when at least one outer observable emit
+    // use combineLatest to combine state from store
+    combineLatest([of('x'), of('y'), interval$]);
+
+    // zip
+    //    zip(of(1, 2, 3), of(4, 5, 6), of(7, 8, 9)).subscribe(observer);
+
+    // contact - merge, concat will emit value IN ORDER
+    concat(of(4, 5, 6).pipe(delay(1000)), of(1, 2, 3));
+
+    // startWith
+    of('world').pipe(
+      //startWith('Hello'),
+      endWith('Hello'),
+      finalize(() => console.log('final'))
+    );
+
     // test withLatestFrom, combine outer observable with another observable
     // use in NgRx
     fromEvent(document, 'click').pipe(withLatestFrom(interval$));
+
+    // pairwise
+    from([5, 2, 125, 1, 0]).pipe(pairwise());
   }
 }
