@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 
 import {
@@ -15,26 +15,34 @@ import {
   fromEvent,
   bufferTime,
   from,
-  filter,
-  first,
-  last,
-  find,
-  single,
-  take,
-  takeLast,
-  skip,
-  distinct,
   distinctUntilChanged,
-  distinctUntilKeyChanged,
+  // zip,
+  // filter,
+  // startWith,
+  // first,
+  // last,
+  // find,
+  // single,
+  // take,
+  // takeLast,
+  // skip,
+  // distinct,
+  // distinctUntilKeyChanged,
   withLatestFrom,
   forkJoin,
   combineLatest,
-  zip,
   concat,
-  startWith,
   finalize,
   endWith,
-  pairwise
+  pairwise,
+  catchError,
+  retry,
+  defaultIfEmpty,
+  throwIfEmpty,
+  every,
+  first,
+  // iif,
+  defer
 } from 'rxjs';
 import { NodeEventHandler } from 'rxjs/internal/observable/fromEvent';
 
@@ -45,7 +53,8 @@ import { TabsComponent } from './components';
   standalone: true,
   imports: [NgTemplateOutlet, TabsComponent],
   templateUrl: './fragments.component.html',
-  styleUrl: './fragments.component.scss'
+  styleUrl: './fragments.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FragmentsComponent implements OnInit {
   public counter = 0;
@@ -69,8 +78,8 @@ export class FragmentsComponent implements OnInit {
 
   public ngOnInit(): void {
     const observer = {
-      next: (value: unknown) => console.log(value),
-      error: (error: unknown) => console.log(error),
+      next: (value: unknown) => console.log('next value::', value),
+      error: (error: unknown) => console.error('error obs::', error),
       complete: () => console.log('complete')
     };
     // convert promise to observable
@@ -82,8 +91,6 @@ export class FragmentsComponent implements OnInit {
     const removeClickHandler = (handler: NodeEventHandler) =>
       document.removeEventListener('click', handler);
     fromEventPattern<PointerEvent>(addClickHandler, removeClickHandler).pipe(map((x) => x.offsetX));
-
-    throwError(() => new Error('catch my error'));
 
     // run when observable has new subscribe
     //const random$ = defer(() => of(Math.random()));
@@ -170,5 +177,58 @@ export class FragmentsComponent implements OnInit {
 
     // pairwise
     from([5, 2, 125, 1, 0]).pipe(pairwise());
+
+    forkJoin([
+      of(1),
+      of(2),
+      throwError(() => new Error('error')).pipe(
+        catchError((x) => {
+          this.logSentryError();
+          // if you want to handle error when subscribe obs -> throwError
+          return of(() => x.message);
+        })
+      )
+    ]);
+
+    const cached = [4, 5];
+    of(1, 2, 3, 4, 5).pipe(
+      map((n) => {
+        if (cached.includes(n)) {
+          throw new Error('Duplicated: ' + n);
+        }
+        return n;
+      }),
+      retry(3)
+    );
+
+    //defaultIfEmpty, throwIfEmpty
+    of().pipe(delay(2000), defaultIfEmpty('default value'));
+    of().pipe(
+      delay(2000),
+      throwIfEmpty(() => 'default value') // throw in the error phase
+    );
+
+    of(1, 2, 4, 5, 10).pipe(every((x) => x >= 0));
+    // some() in rxjs, like array some
+    of(1, 2, 4, 5, 1000).pipe(
+      first((x) => x > 20, false),
+      map((y) => Boolean(y))
+    );
+
+    const id = null;
+    const updateObservable = (id: number | null) => {
+      if (id === null) {
+        throw new Error('oops, wrong!');
+      }
+      return of(`update ${id}::`);
+    };
+    const removeObservable = (id: number | null) => of(`remove ${id}`);
+    // best practice, use defer to make sure everything will run
+    // iif(() => id !== null, updateObservable(id), removeObservable(id));
+    defer(() => (id !== null ? updateObservable(id) : removeObservable(id))).subscribe(observer);
+  }
+
+  private logSentryError(): void {
+    console.error('log logSentryError');
   }
 }

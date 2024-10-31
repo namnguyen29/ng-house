@@ -10,15 +10,13 @@
 <app-progress-bar [progress]="41" [backgroundColor]="'#9e9e9e'" [progressColor]="'#2e8b57'" />
 
 <app-toggle #toggleCmp [(checked)]="isChecked">
-  <h3 ngProjectAs=".header">header14</h3>
-  <p class="footer">footer14</p>
+  <h3 class="header">header14</h3>
   <p class="content">content14</p>
+  <p class="footer">footer14</p>
 </app-toggle>
-
+<br />
 <app-toggle #toggleCmp [(checked)]="isChecked2">
-  <h3 class="header">header1234</h3>
-  <p ngProjectAs=".footer">footer1234</p>
-  <p class="content">content1234</p>
+  <div ngProjectAs="app-progress-bar" class="h-[50px] w-[100px] bg-amber-600">Project as</div>
 </app-toggle>
 
 <!-- Interact with component using #template -->
