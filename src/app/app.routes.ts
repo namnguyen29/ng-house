@@ -37,6 +37,7 @@ export const routes: Routes = [
         title: 'Authors | Ng House'
       },
       {
+        // learn rxjs - hoo in this page
         path: 'my-pipe',
         loadComponent: async () =>
           (await import('./pages/my-pipe/my-pipe.component')).MyPipeComponent,
