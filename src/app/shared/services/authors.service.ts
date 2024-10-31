@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { of, delay, map, Observable } from 'rxjs';
+
 import { Author } from '@app-shared/interfaces';
 
 @Injectable({
@@ -48,4 +50,18 @@ export class AuthorsService {
       ipAddress: '192.168.1.5'
     }
   ];
+
+  public getAuthors(param: string | null): Observable<Author[]> {
+    return of(this.authors).pipe(
+      delay(1000),
+      map((authors) =>
+        authors.filter((author) =>
+          !param
+            ? true
+            : author.firstName.toLowerCase().startsWith(param.toLowerCase()) ||
+              author.lastName.toLowerCase().startsWith(param.toLowerCase())
+        )
+      )
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-my-item',
@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyItemComponent implements OnInit {
-  public name = '';
+  @Input({ required: true }) public name = '';
 
   public ngOnInit(): void {
     // interval(1000)

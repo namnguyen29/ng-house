@@ -1,5 +1,30 @@
 <section>
-  <app-my-item></app-my-item>
+  <app-my-item name="Nam Nam"></app-my-item>
   <em>my date: {{ today | date: 'longDate' }}</em>
   <p>user add: {{ user | formatAddress }}</p>
+
+  <div>
+    <label for="last_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+      >Last name</label
+    >
+    <input
+      type="text"
+      id="last_name"
+      class="block w-1/2 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+      placeholder="Doe"
+      [formControl]="nameControl"
+    />
+
+    @if (isLoading) {
+      <p>Loading with ... {{ nameControl.value }}</p>
+    } @else {
+      <ul>
+        @for (author of authors; track $index) {
+          <li>
+            <p>{{ author | json }}</p>
+          </li>
+        }
+      </ul>
+    }
+  </div>
 </section>
