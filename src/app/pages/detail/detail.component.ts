@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
+
+import { Observable } from 'rxjs';
 
 import { HousingLocation } from '@app-shared/interfaces';
 import { HousingService } from '@app-shared/services';
@@ -15,8 +16,8 @@ import { HousingService } from '@app-shared/services';
   styleUrl: './detail.component.scss'
 })
 export class DetailComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
+  private readonly route = inject(ActivatedRoute);
   private readonly housingService = inject(HousingService);
   private housingLocationId = -1;
   public housingLocation$!: Observable<HousingLocation | undefined>;
