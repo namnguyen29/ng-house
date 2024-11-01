@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
 
+import { MainLayoutComponent } from '@app-containers/layouts';
+import { HomeComponent } from '@app-pages/home/home.component';
+
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: async () =>
-      (await import('./containers/layouts/main-layout/main-layout.component')).MainLayoutComponent,
+    component: MainLayoutComponent,
     children: [
       {
         path: '',
-        loadComponent: async () => (await import('./pages/home/home.component')).HomeComponent,
+        component: HomeComponent,
         title: 'Home | Ng House'
       },
       {
@@ -42,6 +44,13 @@ export const routes: Routes = [
         loadComponent: async () =>
           (await import('./pages/my-pipe/my-pipe.component')).MyPipeComponent,
         title: 'My Pipe | Ng House'
+      },
+      {
+        // learn rxjs - subject in this page
+        path: 'my-subject',
+        loadComponent: async () =>
+          (await import('./pages/my-subject/my-subject.component')).MySubjectComponent,
+        title: 'My Subject | Ng House'
       }
     ]
   }
