@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  viewChild
+} from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
@@ -27,10 +34,12 @@ export class DetailComponent implements OnInit {
     lastName: this.fb.control(''),
     email: this.fb.control('')
   });
+  public firstnameRef = viewChild<ElementRef<HTMLInputElement>>('firstName');
 
   public ngOnInit(): void {
     this.housingLocationId = this.route.snapshot.params['id'];
     this.housingLocation$ = this.housingService.getHousingLocationById(this.housingLocationId);
+    this.firstnameRef()?.nativeElement.focus();
   }
 
   public submitApplication(): void {

@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-import { ENV_CONFIG } from '@app-core/configs';
+import { ENV_CONFIG } from 'src/app/configs';
 import { HousingLocation } from '@app-shared/interfaces';
 
 @Injectable({

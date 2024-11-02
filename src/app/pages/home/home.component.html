@@ -15,14 +15,6 @@
     track housingLocation.id;
     let idx =$index, e= $even
   ) {
-    @if (idx % 2 !== 0) {
-      <app-house-location [housingLocation]="housingLocation"></app-house-location>
-    } @else {
-      <ul>
-        <li>{{ idx }}</li>
-        <li>{{ e }}</li>
-        <li>{{ $last }}</li>
-      </ul>
-    }
+    <app-house-location [housingLocation]="housingLocation"></app-house-location>
   }
 </section>
