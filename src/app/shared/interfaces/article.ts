@@ -4,4 +4,5 @@ export interface Article {
   title: string;
   content: string;
   updateAt: string;
+  author: string;
 }

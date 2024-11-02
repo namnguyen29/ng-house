@@ -1,13 +1,13 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 import { ArticleService } from '@app-shared/services';
 
 @Component({
   selector: 'app-article-list',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, RouterOutlet],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

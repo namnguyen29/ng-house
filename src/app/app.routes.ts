@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { MainLayoutComponent } from '@app-containers/layouts';
 import { HomeComponent } from '@app-pages/home/home.component';
+import { articleDetailGuard, preventArticleGuard } from '@app-shared/guards';
 
 export const routes: Routes = [
   {
@@ -52,19 +53,24 @@ export const routes: Routes = [
           (await import('./pages/my-subject/my-subject.component')).MySubjectComponent,
         title: 'My Subject'
       },
-      {
-        path: 'articles/:slug',
-        loadComponent: async () =>
-          (await import('./pages/article-detail/article-detail.component')).ArticleDetailComponent,
-        data: {
-          hello: 'Router Data'
-        }
-      },
+
       {
         path: 'articles',
         loadComponent: async () =>
           (await import('./pages/article-list/article-list.component')).ArticleListComponent,
-        title: 'Article List'
+        title: 'Article List',
+        canActivateChild: [articleDetailGuard],
+        canDeactivate: [preventArticleGuard],
+        children: [
+          {
+            path: ':slug',
+            loadComponent: async () =>
+              (await import('./pages/article-list/components')).ArticleDetailComponent,
+            data: {
+              hello: 'Router Data'
+            }
+          }
+        ]
       }
     ]
   },

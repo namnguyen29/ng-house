@@ -3,8 +3,8 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 
 import { environment } from '@app-environments/environment';
+import { providePageTitleStrategy, provideEnvironment } from './app/configs';
 import { routes } from './app/app.routes';
-import { providePageTitleStrategy, provideEnvironment } from '@app-core/configs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
