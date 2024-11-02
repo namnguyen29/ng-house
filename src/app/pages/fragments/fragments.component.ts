@@ -53,7 +53,6 @@ import { TabsComponent } from './components';
   standalone: true,
   imports: [NgTemplateOutlet, TabsComponent],
   templateUrl: './fragments.component.html',
-  styleUrl: './fragments.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FragmentsComponent implements OnInit {

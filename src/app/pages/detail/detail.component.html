@@ -1,11 +1,12 @@
 @if (housingLocation$ | async; as housingLocation) {
   <article>
     <a routerLink="/">← Return to list</a>
-
     <img
-      fill
+      priority
       crossorigin
-      class="listing-photo"
+      class="listing-photo object-cover"
+      width="150"
+      height="100"
       alt="Exterior of {{ housingLocation?.name }}"
       [ngSrc]="housingLocation.photo"
       (submit)="submitApplication()"

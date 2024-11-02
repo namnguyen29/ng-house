@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import { map } from 'rxjs';
 
@@ -9,7 +10,7 @@ import { HousingService } from '@app-shared/services';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HouseLocationComponent, AsyncPipe],
+  imports: [HouseLocationComponent, RouterLink, AsyncPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

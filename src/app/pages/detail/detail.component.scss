@@ -55,9 +55,11 @@ input {
   border-left: none;
   border-bottom: solid 0.3px;
 }
+
 @media (max-width: 1024px) {
   .listing-photo {
-    width: 100%;
+    width: 50%;
+    object-fit: contain;
     height: 400px;
   }
 }
