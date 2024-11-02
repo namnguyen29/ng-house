@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
@@ -13,7 +13,8 @@ import { HousingService } from '@app-shared/services';
   standalone: true,
   imports: [RouterLink, AsyncPipe, ReactiveFormsModule, NgOptimizedImage],
   templateUrl: './detail.component.html',
-  styleUrl: './detail.component.scss'
+  styleUrl: './detail.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailComponent implements OnInit {
   private readonly fb = inject(FormBuilder);

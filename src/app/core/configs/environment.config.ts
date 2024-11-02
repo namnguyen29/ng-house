@@ -4,7 +4,7 @@ import { Environment } from '@app-shared/interfaces';
 
 export const ENV_CONFIG = new InjectionToken<Environment>('env.config');
 
-export const getEnvironmentProvider = (value: Environment): ValueProvider => ({
+export const provideEnvironment = (value: Environment): ValueProvider => ({
   useValue: value,
   provide: ENV_CONFIG
 });

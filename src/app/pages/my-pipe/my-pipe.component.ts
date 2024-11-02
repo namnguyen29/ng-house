@@ -1,23 +1,23 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   inject,
   OnDestroy,
-  OnInit
+  OnInit,
+  signal
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { DatePipe, JsonPipe } from '@angular/common';
+import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
 
 import {
   concatMap,
   debounceTime,
   distinctUntilChanged,
   exhaustMap,
-  finalize,
   fromEvent,
   interval,
   mergeMap,
+  Observable,
   startWith,
   Subject,
   switchMap,
@@ -34,13 +34,11 @@ import { AuthorsService } from '@app-shared/services';
 @Component({
   selector: 'app-my-pipe',
   standalone: true,
-  imports: [MyItemComponent, DatePipe, FormatAddressPipe, JsonPipe, ReactiveFormsModule],
+  imports: [MyItemComponent, DatePipe, FormatAddressPipe, JsonPipe, AsyncPipe, ReactiveFormsModule],
   templateUrl: './my-pipe.component.html',
-  styleUrl: './my-pipe.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyPipeComponent implements OnInit, OnDestroy {
-  private readonly cdr = inject(ChangeDetectorRef);
   private readonly fb = inject(FormBuilder);
   private readonly authorService = inject(AuthorsService);
   private readonly destroy$ = new Subject<void>();
@@ -52,8 +50,8 @@ export class MyPipeComponent implements OnInit, OnDestroy {
     age: 28,
     country: 'vn'
   };
-  public isLoading = false;
-  public authors: Author[] = [];
+  public loadingSignal = signal(false);
+  public authors$!: Observable<Author[]>;
 
   public ngOnInit(): void {
     fromEvent(document, 'click').pipe(switchMap(() => interval(1000).pipe(take(5))));
@@ -61,30 +59,16 @@ export class MyPipeComponent implements OnInit, OnDestroy {
     fromEvent(document, 'click').pipe(concatMap(() => interval(1000).pipe(take(5))));
     fromEvent(document, 'click').pipe(exhaustMap(() => interval(1000).pipe(take(5))));
 
-    this.nameControl.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(() => {
-          this.isLoading = true;
-          this.cdr.markForCheck();
-        }),
-        startWith(''),
-        switchMap((param) => {
-          return this.authorService.getAuthors(param).pipe(
-            finalize(() => {
-              this.isLoading = false;
-              this.cdr.markForCheck();
-            })
-          );
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe({
-        next: (authors) => {
-          this.authors = [...authors];
-        }
-      });
+    this.authors$ = this.nameControl.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap(() => this.loadingSignal.set(true)),
+      startWith(''),
+      switchMap((param) => {
+        return this.authorService.getAuthors(param).pipe(tap(() => this.loadingSignal.set(false)));
+      }),
+      takeUntil(this.destroy$)
+    );
   }
 
   public ngOnDestroy(): void {
