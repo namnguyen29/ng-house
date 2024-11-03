@@ -1,0 +1,54 @@
+<article class="flex min-h-svh items-center justify-center">
+  <form class="flex w-[450px] flex-col gap-2 px-4" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="emailErrorTmpl">
+        <nz-form-label nzFor="email">Email</nz-form-label>
+        <input nz-input name="email" type="text" id="email" formControlName="email" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="password">Password</nz-form-label>
+      <input nz-input name="password" type="password" id="password" formControlName="password" />
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="titleErrorTmpl">
+        <nz-form-label nzFor="title">Title</nz-form-label>
+        <input nz-input name="title" type="text" id="title" formControlName="title" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <span nz-checkbox formControlName="rememberMe">Remember me?</span>
+    </nz-form-item>
+
+    <button nz-button nzType="primary" class="ml-auto" type="submit">Sign in</button>
+    <button nz-button nzType="dashed" class="ml-auto" type="button" (click)="patchValue()">
+      Patch Value
+    </button>
+    <button nz-button class="ant-btn--green ml-auto" type="button" (click)="setValue()">
+      Set Value
+    </button>
+
+    <pre>{{ signInForm.value | json }}</pre>
+  </form>
+</article>
+
+<ng-template #emailErrorTmpl>
+  @let emailControl = signInForm.controls['email'];
+  @if (emailControl.hasError('required')) {
+    <span>Email field is required</span>
+  } @else if (emailControl.hasError('email')) {
+    <span>Please enter a valid email address</span>
+  } @else if (emailControl.hasError('whitespace')) {
+    <span>{{ emailControl.errors?.['whitespace'] }}</span>
+  }
+</ng-template>
+
+<ng-template #titleErrorTmpl>
+  @let titleControl = signInForm.controls['title'];
+  @if (titleControl.hasError('noMatch')) {
+    <span>{{ titleControl.errors?.['noMatch'] }}</span>
+  }
+</ng-template>
