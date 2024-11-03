@@ -53,7 +53,6 @@ export const routes: Routes = [
           (await import('./pages/my-subject/my-subject.component')).MySubjectComponent,
         title: 'My Subject'
       },
-
       {
         path: 'articles',
         loadComponent: async () =>
@@ -73,6 +72,17 @@ export const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: 'signin',
+    loadComponent: async () => (await import('./pages/sign-in/sign-in.component')).SignInComponent,
+    title: 'Login'
+  },
+  {
+    path: 'signin-rf',
+    loadComponent: async () =>
+      (await import('./pages/sign-in-rf/sign-in-rf.component')).SignInRfComponent,
+    title: 'SignIn Rf'
   },
   {
     path: '**',

@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  input
+  // effect
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { HousingLocation } from '@app-shared/interfaces';
@@ -11,5 +15,11 @@ import { HousingLocation } from '@app-shared/interfaces';
   styleUrl: './house-location.component.scss'
 })
 export class HouseLocationComponent {
-  @Input() public housingLocation!: HousingLocation;
+  public housingLocation = input.required<HousingLocation>();
+
+  // constructor() {
+  //   effect(() => {
+  //     console.log('view house input::', this.housingLocation());
+  //   });
+  // }
 }
