@@ -36,19 +36,9 @@
 </article>
 
 <ng-template #emailErrorTmpl>
-  @let emailControl = signInForm.controls['email'];
-  @if (emailControl.hasError('required')) {
-    <span>Email field is required</span>
-  } @else if (emailControl.hasError('email')) {
-    <span>Please enter a valid email address</span>
-  } @else if (emailControl.hasError('whitespace')) {
-    <span>{{ emailControl.errors?.['whitespace'] }}</span>
-  }
+  <span>{{ errorMessage().email }}</span>
 </ng-template>
 
 <ng-template #titleErrorTmpl>
-  @let titleControl = signInForm.controls['title'];
-  @if (titleControl.hasError('noMatch')) {
-    <span>{{ titleControl.errors?.['noMatch'] }}</span>
-  }
+  <span>{{ errorMessage().title }}</span>
 </ng-template>
