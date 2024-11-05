@@ -79,12 +79,6 @@ export const routes: Routes = [
     title: 'Login'
   },
   {
-    path: 'signin-rf',
-    loadComponent: async () =>
-      (await import('./pages/sign-in-rf/sign-in-rf.component')).SignInRfComponent,
-    title: 'SignIn Rf'
-  },
-  {
     path: '**',
     loadComponent: async () =>
       (await import('./pages/page-not-found/page-not-found.component')).PageNotFoundComponent

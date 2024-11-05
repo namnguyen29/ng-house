@@ -6,6 +6,7 @@
     "baseUrl": ".",
     "paths": {
       "@app-pages/*": ["src/app/pages/*"],
+      "@app-core/*": ["src/app/core/*"],
       "@app-containers/*": ["src/app/containers/*"],
       "@app-shared/*": ["src/app/shared/*"],
       "@app-environments/*": ["src/environments/*"]
