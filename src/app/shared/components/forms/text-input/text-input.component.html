@@ -1,0 +1,40 @@
+<div class="text-sm">
+  <label [htmlFor]="props.id" [class.text-nz-red-0]="props.error">{{ props.label }}</label>
+
+  @if (!props.multi) {
+    <input
+      #inputRef
+      nz-input
+      class="w-full"
+      [value]="value"
+      [disabled]="disabled"
+      [nzStatus]="props.error ? 'error' : ''"
+      [type]="props.type"
+      [id]="props.id"
+      [name]="props.name"
+      [placeholder]="props.placeholder"
+      (change)="handleOnChanged($event)"
+      (blur)="handleOnTouched()"
+    />
+  }
+
+  @if (props.multi) {
+    <textarea
+      #inputRef
+      nz-input
+      rows="5"
+      [value]="value"
+      [disabled]="disabled"
+      [nzStatus]="props.error ? 'error' : ''"
+      [id]="props.id"
+      [name]="props.name"
+      [placeholder]="props.placeholder"
+    ></textarea>
+  }
+
+  <div class="min-h-6">
+    @if (props.error) {
+      <p class="text-nz-red-0">{{ props.error }}</p>
+    }
+  </div>
+</div>
