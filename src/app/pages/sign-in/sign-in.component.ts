@@ -7,14 +7,7 @@ import {
   OnInit,
   signal
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators
-} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -23,6 +16,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { merge, Subject, takeUntil } from 'rxjs';
 
 import { checkTitleAsync, noWhiteSpace } from '@app-shared/validators';
+import { TextInputComponent } from '@app-shared/components';
 
 @Component({
   selector: 'app-sign-in',
@@ -32,6 +26,7 @@ import { checkTitleAsync, noWhiteSpace } from '@app-shared/validators';
     NzButtonModule,
     NzCheckboxModule,
     NzFormModule,
+    TextInputComponent,
     ReactiveFormsModule,
     JsonPipe
   ],
@@ -42,7 +37,6 @@ import { checkTitleAsync, noWhiteSpace } from '@app-shared/validators';
 export class SignInComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
   private readonly fb = inject(FormBuilder);
-  private readonly http = inject(HttpClient);
   public readonly errorMessage = signal({
     email: '',
     title: ''
@@ -51,11 +45,9 @@ export class SignInComponent implements OnInit, OnDestroy {
     email: this.fb.control('', {
       validators: [Validators.required, noWhiteSpace(), Validators.email]
     }),
-    password: this.fb.control('', {
-      validators: [Validators.required]
-    }),
+    password: this.fb.control(''),
     title: this.fb.control('delectus aut autemM', {
-      asyncValidators: checkTitleAsync(this.http),
+      asyncValidators: checkTitleAsync(),
       updateOn: 'blur'
     }),
     rememberMe: this.fb.control(false)
@@ -81,6 +73,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   public onSubmit(): void {
     const formValues = this.signInForm.value;
     console.log('formValues::', formValues);
+    console.log('is-valid::', this.emailControl.errors);
   }
 
   public patchValue(): void {
@@ -124,16 +117,23 @@ export class SignInComponent implements OnInit, OnDestroy {
   }
 
   private updateEmailErrors(): void {
-    const validationErrors: ValidationErrors = {
-      email: 'Email field is required',
-      required: 'Please enter a valid email address',
-      whitespace: this.emailControl.errors?.['whitespace']
-    };
-
-    Object.entries(validationErrors).forEach(([key, message]) => {
-      if (this.emailControl.invalid && this.emailControl.hasError(key)) {
-        this.errorMessage.update((value) => ({ ...value, email: message }));
-      }
-    });
+    if (this.emailControl.hasError('noMatch')) {
+      this.errorMessage.update((value) => ({
+        ...value,
+        email: this.titleControl.errors?.['noMatch']
+      }));
+    } else if (this.emailControl.hasError('email')) {
+      this.errorMessage.update((value) => ({
+        ...value,
+        email: 'Please enter a valid email address'
+      }));
+    } else if (this.emailControl.hasError('required')) {
+      this.errorMessage.update((value) => ({
+        ...value,
+        email: 'Email field is required'
+      }));
+    } else {
+      this.errorMessage.update((value) => ({ ...value, email: '' }));
+    }
   }
 }
