@@ -49,15 +49,15 @@ export class TextInputComponent implements AfterViewInit, ControlValueAccessor {
   }
 
   public writeValue(value: string): void {
-    this.value = value;
+    this.onChanged(value);
   }
 
   // eslint-disable-next-line no-unused-vars
-  registerOnChange(fn: (value: string) => void): void {
+  public registerOnChange(fn: (value: string) => void): void {
     this.onChanged = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.handleOnTouched = fn;
   }
 

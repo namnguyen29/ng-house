@@ -6,5 +6,6 @@ export interface TextInputProps {
   placeholder: string;
   error?: string;
   multi?: boolean;
+  autocomplete?: string;
   autofocus?: boolean;
 }
