@@ -4,7 +4,9 @@
     <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
   </form>
 
-  <h1 class="text-2xl font-bold text-red-300 underline">Hello world!</h1>
+  <h1 appHighlight [highlightColor]="'yellow'" class="text-2xl font-bold underline">
+    Hello world!
+  </h1>
   <!-- Test with Signal -->
 
   <a class="text-2xl font-bold text-red-700 underline" routerLink="/articles">View Articles!</a>
@@ -14,8 +16,12 @@
   @for (
     housingLocation of filteredLocationList$ | async;
     track housingLocation.id;
-    let idx =$index, e= $even
+    let idx = $index, e = $even
   ) {
     <app-house-location [housingLocation]="housingLocation"></app-house-location>
   }
 </section>
+
+<div class="progress-container">
+  <progress class="progress-bar" max="100" [value]="value()"></progress>
+</div>

@@ -73,7 +73,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   public onSubmit(): void {
     const formValues = this.signInForm.value;
     console.log('formValues::', formValues);
-    console.log('is-valid::', this.emailControl.errors);
+    console.log('is-valid::', this.signInForm.valid);
   }
 
   public patchValue(): void {

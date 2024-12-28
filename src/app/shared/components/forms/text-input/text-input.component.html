@@ -6,6 +6,7 @@
       #inputRef
       nz-input
       class="w-full"
+      [autocomplete]="props.autocomplete"
       [value]="value"
       [disabled]="disabled"
       [nzStatus]="props.error ? 'error' : ''"
@@ -23,12 +24,15 @@
       #inputRef
       nz-input
       rows="5"
+      class="w-full"
       [value]="value"
       [disabled]="disabled"
       [nzStatus]="props.error ? 'error' : ''"
       [id]="props.id"
       [name]="props.name"
       [placeholder]="props.placeholder"
+      (change)="handleOnChanged($event)"
+      (blur)="handleOnTouched()"
     ></textarea>
   }
 
