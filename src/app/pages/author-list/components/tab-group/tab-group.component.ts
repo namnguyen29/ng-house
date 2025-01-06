@@ -8,15 +8,13 @@ import {
   Output,
   QueryList
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { TabPanelComponent } from '..';
 import { NgTemplateOutlet } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tab-group',
-  standalone: true,
-  imports: [RouterLink, NgTemplateOutlet],
+  imports: [NgTemplateOutlet],
   templateUrl: './tab-group.component.html',
   styleUrl: './tab-group.component.scss'
 })

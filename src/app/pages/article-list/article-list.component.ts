@@ -9,12 +9,11 @@ import { JsonApi } from '@app-shared/apis';
 import { ArticleService } from '@app-shared/services';
 
 @Component({
-  selector: 'app-article-list',
-  standalone: true,
-  imports: [AsyncPipe, RouterOutlet],
-  templateUrl: './article-list.component.html',
-  styleUrl: './article-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-article-list',
+    imports: [AsyncPipe, RouterOutlet],
+    templateUrl: './article-list.component.html',
+    styleUrl: './article-list.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleListComponent {
   private readonly articleService = inject(ArticleService);

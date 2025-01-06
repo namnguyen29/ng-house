@@ -6,18 +6,17 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { TextInputProps } from '@app-shared/interfaces';
 
 @Component({
-  selector: 'app-text-input',
-  standalone: true,
-  imports: [NzInputModule],
-  templateUrl: './text-input.component.html',
-  styleUrl: './text-input.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TextInputComponent),
-      multi: true
-    }
-  ]
+    selector: 'app-text-input',
+    imports: [NzInputModule],
+    templateUrl: './text-input.component.html',
+    styleUrl: './text-input.component.scss',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TextInputComponent),
+            multi: true
+        }
+    ]
 })
 export class TextInputComponent implements AfterViewInit, ControlValueAccessor {
   @Input({ required: true }) public props: TextInputProps = {

@@ -32,11 +32,10 @@ import { FormatAddressPipe } from '@app-shared/pipes';
 import { AuthorsService } from '@app-shared/services';
 
 @Component({
-  selector: 'app-my-pipe',
-  standalone: true,
-  imports: [MyItemComponent, DatePipe, FormatAddressPipe, JsonPipe, AsyncPipe, ReactiveFormsModule],
-  templateUrl: './my-pipe.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-my-pipe',
+    imports: [MyItemComponent, DatePipe, FormatAddressPipe, JsonPipe, AsyncPipe, ReactiveFormsModule],
+    templateUrl: './my-pipe.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyPipeComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);

@@ -10,12 +10,11 @@ import {
 } from 'rxjs';
 
 @Component({
-  selector: 'app-my-subject',
-  standalone: true,
-  imports: [],
-  templateUrl: './my-subject.component.html',
-  styleUrl: './my-subject.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-my-subject',
+    imports: [],
+    templateUrl: './my-subject.component.html',
+    styleUrl: './my-subject.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MySubjectComponent implements OnInit {
   ngOnInit(): void {

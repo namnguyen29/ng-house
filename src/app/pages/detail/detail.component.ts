@@ -16,12 +16,11 @@ import { HousingLocation } from '@app-shared/interfaces';
 import { HousingService } from '@app-shared/services';
 
 @Component({
-  selector: 'app-detail',
-  standalone: true,
-  imports: [RouterLink, AsyncPipe, ReactiveFormsModule, NgOptimizedImage],
-  templateUrl: './detail.component.html',
-  styleUrl: './detail.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-detail',
+    imports: [RouterLink, AsyncPipe, ReactiveFormsModule, NgOptimizedImage],
+    templateUrl: './detail.component.html',
+    styleUrl: './detail.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailComponent implements OnInit {
   private readonly fb = inject(FormBuilder);

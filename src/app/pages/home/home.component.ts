@@ -9,12 +9,11 @@ import { HousingService } from '@app-shared/services';
 import { HighlightDirective } from '@app-shared/directives';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [HouseLocationComponent, HighlightDirective, RouterLink, AsyncPipe],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-home',
+    imports: [HouseLocationComponent, HighlightDirective, RouterLink, AsyncPipe],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
   private readonly housingService = inject(HousingService);

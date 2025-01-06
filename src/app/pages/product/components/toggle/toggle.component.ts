@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-toggle',
-  standalone: true,
-  imports: [],
-  templateUrl: './toggle.component.html',
-  styleUrl: './toggle.component.scss'
+    selector: 'app-toggle',
+    imports: [],
+    templateUrl: './toggle.component.html',
+    styleUrl: './toggle.component.scss'
 })
 export class ToggleComponent {
   @Input() public checked = false;

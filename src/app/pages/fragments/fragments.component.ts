@@ -49,11 +49,10 @@ import { NodeEventHandler } from 'rxjs/internal/observable/fromEvent';
 import { TabsComponent } from './components';
 
 @Component({
-  selector: 'app-fragments',
-  standalone: true,
-  imports: [NgTemplateOutlet, TabsComponent],
-  templateUrl: './fragments.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-fragments',
+    imports: [NgTemplateOutlet, TabsComponent],
+    templateUrl: './fragments.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FragmentsComponent implements OnInit {
   public counter = 0;
