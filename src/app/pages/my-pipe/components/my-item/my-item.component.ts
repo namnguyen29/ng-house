@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-my-item',
-  standalone: true,
-  imports: [],
-  templateUrl: './my-item.component.html',
-  styleUrl: './my-item.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-my-item',
+    imports: [],
+    templateUrl: './my-item.component.html',
+    styleUrl: './my-item.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyItemComponent implements OnInit {
   @Input({ required: true }) public name = '';

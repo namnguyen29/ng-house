@@ -17,18 +17,17 @@ import { ProgressBarComponent, ToggleComponent } from './components';
 import { FlexContainerComponent } from '@app-shared/components';
 
 @Component({
-  selector: 'app-product',
-  standalone: true,
-  imports: [
-    FormsModule,
-    ProgressBarComponent,
-    ToggleComponent,
-    CommonModule,
-    FlexContainerComponent,
-    NgTemplateOutlet
-  ],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.scss'
+    selector: 'app-product',
+    imports: [
+        FormsModule,
+        ProgressBarComponent,
+        ToggleComponent,
+        CommonModule,
+        FlexContainerComponent,
+        NgTemplateOutlet
+    ],
+    templateUrl: './product.component.html',
+    styleUrl: './product.component.scss'
 })
 export class ProductComponent implements AfterViewInit, OnInit, OnDestroy {
   private readonly _destroy$ = new Subject<void>();

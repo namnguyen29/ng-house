@@ -7,7 +7,6 @@ import { TabContentDirective } from '@app-shared/directives';
 
 @Component({
   selector: 'app-author-list',
-  standalone: true,
   imports: [
     AuthorDetailComponent,
     TabGroupComponent,

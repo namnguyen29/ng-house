@@ -19,20 +19,19 @@ import { checkTitleAsync, noWhiteSpace } from '@app-shared/validators';
 import { TextInputComponent } from '@app-shared/components';
 
 @Component({
-  selector: 'app-sign-in',
-  standalone: true,
-  imports: [
-    NzInputModule,
-    NzButtonModule,
-    NzCheckboxModule,
-    NzFormModule,
-    TextInputComponent,
-    ReactiveFormsModule,
-    JsonPipe
-  ],
-  templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-sign-in',
+    imports: [
+        NzInputModule,
+        NzButtonModule,
+        NzCheckboxModule,
+        NzFormModule,
+        TextInputComponent,
+        ReactiveFormsModule,
+        JsonPipe
+    ],
+    templateUrl: './sign-in.component.html',
+    styleUrl: './sign-in.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignInComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();

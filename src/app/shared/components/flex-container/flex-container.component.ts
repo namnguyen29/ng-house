@@ -3,11 +3,10 @@ import { Component, HostBinding, Input } from '@angular/core';
 import { FlexDirection } from '@app-shared/interfaces';
 
 @Component({
-  selector: 'app-flex-container',
-  standalone: true,
-  imports: [],
-  templateUrl: './flex-container.component.html',
-  styleUrl: './flex-container.component.scss'
+    selector: 'app-flex-container',
+    imports: [],
+    templateUrl: './flex-container.component.html',
+    styleUrl: './flex-container.component.scss'
 })
 export class FlexContainerComponent {
   @Input() flexDirection: FlexDirection = 'row';

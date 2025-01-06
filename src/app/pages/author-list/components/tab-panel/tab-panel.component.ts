@@ -14,8 +14,6 @@ import { TabContentDirective } from '@app-shared/directives';
 
 @Component({
   selector: 'app-tab-panel',
-  standalone: true,
-  imports: [TabContentDirective],
   templateUrl: './tab-panel.component.html',
   styleUrl: './tab-panel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

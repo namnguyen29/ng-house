@@ -16,12 +16,11 @@ import { ArticleService } from '@app-shared/services';
 import { Article } from '@app-shared/interfaces';
 
 @Component({
-  selector: 'app-article-detail',
-  standalone: true,
-  imports: [RouterLink, AsyncPipe],
-  templateUrl: './article-detail.component.html',
-  styleUrl: './article-detail.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-article-detail',
+    imports: [RouterLink, AsyncPipe],
+    templateUrl: './article-detail.component.html',
+    styleUrl: './article-detail.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleDetailComponent implements OnInit, OnDestroy {
   private readonly title = inject(Title);
