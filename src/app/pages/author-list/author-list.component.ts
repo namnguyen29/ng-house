@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthorDetailComponent, TabGroupComponent, TabTwGroupComponent } from './components';
+import { TabGroupComponent, TabTwGroupComponent } from './components';
 import { TabPanelComponent } from './components/tab-panel/tab-panel.component';
 import { CounterComponent } from '@app-shared/components';
 import { TabContentDirective } from '@app-shared/directives';
@@ -8,7 +8,6 @@ import { TabContentDirective } from '@app-shared/directives';
 @Component({
   selector: 'app-author-list',
   imports: [
-    AuthorDetailComponent,
     TabGroupComponent,
     TabPanelComponent,
     TabTwGroupComponent,
